@@ -1,6 +1,6 @@
 import scala.swing._
 
-class HelloWorld extends SimpleSwingApplication {
+object HelloWorld extends SimpleSwingApplication {
   def top = new MainFrame {
     title = "Hello World GUI"
     contents = new Button {
@@ -11,6 +11,5 @@ class HelloWorld extends SimpleSwingApplication {
 
 object ScalaQuery extends App {
   Console.println("Hello World: " + (args mkString ", "))
-  val h = new HelloWorld()
-  h.startup(args)
+  HelloWorld.startup(args)
 }
