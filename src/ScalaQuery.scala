@@ -8,7 +8,7 @@ object MyPanel extends GridBagPanel {
   }
 }
 
-object HelloWorld extends SimpleSwingApplication {
+object MainUI extends SimpleSwingApplication {
   def top = new MainFrame {
     title = "Hello World GUI"
     contents = new GridBagPanel {
@@ -82,5 +82,5 @@ object HelloWorld extends SimpleSwingApplication {
 
 object ScalaQuery extends App {
   Console.println("Hello World: " + (args mkString ", "))
-  HelloWorld.startup(args)
+  MainUI.startup(args)
 }
