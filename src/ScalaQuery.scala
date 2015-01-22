@@ -44,19 +44,38 @@ object HelloWorld extends SimpleSwingApplication {
           fill = GridBagPanel.Fill.Both))
       add(Button("Close") { sys.exit(0) },
         constraints(0, 4, gridwidth = 3, fill = GridBagPanel.Fill.Horizontal))
-      add(new ScrollPane(new ListView[String]() {
-        val list = ListBuffer[String]("Blah", "De", "Blah")
-        listData = list
-        listenTo(mouse.clicks)
-        reactions += {
-          case e: MouseClicked => {
-            Console.println("Nonsense");
-            list += "Nonsense 2"
-            listData = list
-          }
+
+      add(new GridBagPanel {
+        def constraints(x: Int, y: Int,
+                        gridwidth: Int = 1, gridheight: Int = 1,
+                        weightx: Double = 0.0, weighty: Double = 0.0,
+                        fill: GridBagPanel.Fill.Value = GridBagPanel.Fill.None): Constraints = {
+          val c = new Constraints
+          c.gridx = x
+          c.gridy = y
+          c.gridwidth = gridwidth
+          c.gridheight = gridheight
+          c.weightx = weightx
+          c.weighty = weighty
+          c.fill = fill
+          c
         }
-      }),
-        constraints(3, 0, gridheight = 5, fill = GridBagPanel.Fill.Both))
+
+        add(new Label("Servers") { border = Swing.EtchedBorder(Swing.Lowered) }, constraints(0, 0))
+        add(new ScrollPane(new ListView[String]() {
+          val list = ListBuffer[String]("Blah", "De", "Blah")
+          listData = list
+          listenTo(mouse.clicks)
+          reactions += {
+            case e: MouseClicked => {
+              Console.println("Nonsense");
+              list += "Nonsense 2"
+              listData = list
+            }
+          }
+        }, constraints(0, 1)),
+          constraints(3, 0, gridheight = 5, fill = GridBagPanel.Fill.Both)
+      }
     }
   }
 }
